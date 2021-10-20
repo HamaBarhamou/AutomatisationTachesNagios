@@ -26,12 +26,12 @@ with open(sys.argv[1], "r") as filin:
             IPs.append(i)
 # creaction et ecriture dans le fichier de configuration
 
-with open("cameras.cfg","w") as f:
+with open("FH.cfg","w") as f:
     f.write("define host{")
-    f.write("\nname linux-box ; Name of this template")
+    f.write("\nname radwin-fh-box ; Name of this template")
     f.write("\nuse generic-host ; Inherit default values")
     f.write("\ncheck_period 24x7")
-    f.write("\ncheck_interval 5")
+    f.write("\ncheck_interval 1")
     f.write("\nretry_interval 1")
     f.write("\nmax_check_attempts 10")
     f.write("\ncheck_command check-host-alive")
@@ -50,11 +50,11 @@ with open("cameras.cfg","w") as f:
     i=0
     for nom in noms:
         f.write("\ndefine host{")
-        f.write("\nuse linux-box ; Inherit default values from a template")
-        f.write("\nhost_name ")
+        f.write("\nuse radwin-fh-box ; Inherit default values from a template")
+        f.write("\nhost_name site-fh")
         f.write(nom)
         f.write(" ; The name we're giving to this server")
-        f.write("\nalias ")
+        f.write("\nalias site-fh")
         f.write(nom)
         f.write(" ; A longer name for the server")
         f.write("\naddress ")
@@ -74,7 +74,7 @@ with open("cameras.cfg","w") as f:
     for nom in noms:
         f.write("\ndefine service{")
         f.write("\nuse generic-service")
-        f.write("\nhost_name ")
+        f.write("\nhost_name site-fh")
         f.write(nom)
         f.write("\nservice_description check-host-alive")
         f.write("\ncheck_command check-host-alive")
@@ -84,4 +84,4 @@ with open("cameras.cfg","w") as f:
         f.write("\n")
 f.close()
 print("\n Fichier (cameras.cfg) de configuration Nagios generer:")
-print(os.path.abspath("cameras.cfg"))
+print(os.path.abspath("FH.cfg"))
