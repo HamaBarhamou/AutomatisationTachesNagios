@@ -49,13 +49,16 @@ with open("cameras.cfg","w") as f:
     i=0
     for nom in noms:
         f.write("\ndefine host{")
-        f.write("\nuse linux-box")
+        f.write("\nuse linux-box ; Inherit default values from a template")
         f.write("\nhost_name ")
         f.write(nom)
+        f.write(" ; The name we're giving to this server")
         f.write("\nalias ")
         f.write(nom)
+        f.write(" ; A longer name for the server")
         f.write("\naddress ")
-        f.write(IPs[i])
+        f.write(IPs[i][0:len(IPs[i])-1])
+        f.write(" ; IP address of Remote Linux host")
         f.write("\n}")
         i=i+1
 
