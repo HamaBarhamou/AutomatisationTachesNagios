@@ -10,7 +10,12 @@ if(len(sys.argv)!=2):
 
 with open(sys.argv[1], "r") as filin:
      for ligne in filin.readlines():
-        n,i=str(ligne).split("/")
+        try:
+            n,i=str(ligne).split("/")
+        except ValueError:
+            print("Oufs, une erreur dans les donné d'entrée. Assuré vous que chaque ligne de fichier contient se format de donnée:")
+            print("Cameras name / addresse ip")
+            quit()
         if i not in IPs:
             # supression des espcace dans le nom
             tab=n.split(' ')
