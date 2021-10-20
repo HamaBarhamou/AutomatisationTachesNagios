@@ -11,13 +11,14 @@ if(len(sys.argv)!=2):
 with open(sys.argv[1], "r") as filin:
      for ligne in filin.readlines():
         n,i=str(ligne).split("/")
-        # supression des espcace dans le nom
-        tab=n.split(' ')
-        nom=""
-        for mot in tab:
-            nom=nom+"_"+mot
-        noms.append(nom.lower())
-        IPs.append(i)
+        if i not in IPs:
+            # supression des espcace dans le nom
+            tab=n.split(' ')
+            nom=""
+            for mot in tab:
+                nom=nom+"_"+mot
+            noms.append(nom.lower())
+            IPs.append(i)
 # creaction et ecriture dans le fichier de configuration
 
 with open("cameras.cfg","w") as f:
